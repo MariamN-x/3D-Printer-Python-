@@ -1,10 +1,13 @@
 import simpy
 from printer import CyberPhysicalPrinter
 from job_runner import run_print_job
+from logger import Logger
 
 if __name__ == "__main__":
     env = simpy.Environment()
-    printer = CyberPhysicalPrinter(env)
+    logger = Logger("simulation_log.jsonl")  # ✅ initialize logger
+
+    printer = CyberPhysicalPrinter(env, logger)
 
     env.process(printer._thermal_control_loop())
 
@@ -18,5 +21,5 @@ if __name__ == "__main__":
     env.process(run_print_job(env, printer, gcode_program))
     env.run(until=15)
 
-    for e in printer.event_log:
-        print(e)
+    logger.close()
+    print("Simulation finished. Events saved to simulation_log.jsonl")
