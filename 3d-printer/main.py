@@ -1,108 +1,144 @@
 import simpy
 import time
+import threading
+import tkinter as tk
+from tkinter import ttk
 from printer import CyberPhysicalPrinter
 from job_runner import run_print_job
-from rich.live import Live
-from rich.table import Table
-from rich.panel import Panel
-from rich.layout import Layout
-from rich.console import Console
 
-console = Console()
 
-def render_dashboard(printer, env):
-    layout = Layout()
+class PrinterGUI:
+    def __init__(self, root, env, printer):
+        self.root = root
+        self.env = env
+        self.printer = printer
 
-    # --- Overview Panel ---
-    overview_tbl = Table.grid(expand=True)
-    overview_tbl.add_row(f"Sim Time: {env.now:.2f}s")
-    overview_panel = Panel(overview_tbl, title="Overview")
+        self.root.title("3D Printer Simulator")
+        self.root.geometry("600x500")
 
-    # --- Printer State Panel (Debug Mode) ---
-    tbl = Table(title="Printer State (Debug Mode)")
-    tbl.add_column("Field", style="cyan", no_wrap=True)
-    tbl.add_column("Value", style="magenta")
+        # --- Overview ---
+        self.time_label = ttk.Label(root, text="Sim Time: 0.0s", font=("Arial", 12))
+        self.time_label.pack(pady=5)
 
-    # ECU states
-    tbl.add_row("Main ECU", str(getattr(printer.main_ecu, "state", "N/A")))
-    tbl.add_row("Motion ECU", str(getattr(printer.motion_ecu, "state", "N/A")))
-    tbl.add_row("Thermal ECU", str(getattr(printer.thermal_ecu, "state", "N/A")))
+        # --- ECU States ---
+        ecu_frame = ttk.LabelFrame(root, text="ECU States")
+        ecu_frame.pack(fill="x", padx=10, pady=5)
 
-    # Hotend
-    tbl.add_row("Hotend.current_temp", str(getattr(printer.print_head, "current_temp", "N/A")))
-    tbl.add_row("Hotend.target_temp", str(getattr(printer.print_head, "target_temp", "N/A")))
+        self.main_ecu_var = tk.StringVar()
+        self.motion_ecu_var = tk.StringVar()
+        self.thermal_ecu_var = tk.StringVar()
 
-    # Bed (debug all attributes)
-    tbl.add_row("Bed.current_temp", str(getattr(printer.heated_bed, "current_temp", "N/A")))
-    tbl.add_row("Bed.target_temp", str(getattr(printer.heated_bed, "target_temp", "N/A")))
+        ttk.Label(ecu_frame, text="Main ECU:").grid(row=0, column=0, sticky="w")
+        ttk.Label(ecu_frame, textvariable=self.main_ecu_var).grid(row=0, column=1, sticky="w")
 
-    # Filament (show object + level explicitly)
-    tbl.add_row("Filament.obj", str(printer.filament))
-    try:
-        tbl.add_row("Filament.level", str(printer.filament.level))
-    except Exception as e:
-        tbl.add_row("Filament.level", f"Error: {e}")
+        ttk.Label(ecu_frame, text="Motion ECU:").grid(row=1, column=0, sticky="w")
+        ttk.Label(ecu_frame, textvariable=self.motion_ecu_var).grid(row=1, column=1, sticky="w")
 
-    printer_panel = Panel(tbl)
+        ttk.Label(ecu_frame, text="Thermal ECU:").grid(row=2, column=0, sticky="w")
+        ttk.Label(ecu_frame, textvariable=self.thermal_ecu_var).grid(row=2, column=1, sticky="w")
 
-    # --- Recent Events Panel ---
-    ev_tbl = Table(title="Recent Events", show_lines=True)
-    ev_tbl.add_column("Time", style="yellow", width=6)
-    ev_tbl.add_column("Component", style="cyan", width=18)
-    ev_tbl.add_column("Type", style="green", width=14)
-    ev_tbl.add_column("Details", style="white")
+        # --- Temperatures with Progress Bars ---
+        temp_frame = ttk.LabelFrame(root, text="Temperatures")
+        temp_frame.pack(fill="x", padx=10, pady=5)
 
-    if hasattr(printer, "event_log"):
-        for e in list(printer.event_log)[-10:]:
+        # Hotend
+        ttk.Label(temp_frame, text="Hotend:").grid(row=0, column=0, sticky="w")
+        self.hotend_bar = ttk.Progressbar(temp_frame, length=300, maximum=250)  # max 250°C
+        self.hotend_bar.grid(row=0, column=1, padx=5)
+        self.hotend_label = ttk.Label(temp_frame, text="0 / 0 °C")
+        self.hotend_label.grid(row=0, column=2, sticky="w")
+
+        # Bed
+        ttk.Label(temp_frame, text="Bed:").grid(row=1, column=0, sticky="w")
+        self.bed_bar = ttk.Progressbar(temp_frame, length=300, maximum=120)  # max 120°C
+        self.bed_bar.grid(row=1, column=1, padx=5)
+        self.bed_label = ttk.Label(temp_frame, text="0 / 0 °C")
+        self.bed_label.grid(row=1, column=2, sticky="w")
+
+        # --- Filament ---
+        filament_frame = ttk.LabelFrame(root, text="Filament")
+        filament_frame.pack(fill="x", padx=10, pady=5)
+
+        self.filament_var = tk.StringVar()
+        ttk.Label(filament_frame, text="Remaining:").grid(row=0, column=0, sticky="w")
+        ttk.Label(filament_frame, textvariable=self.filament_var).grid(row=0, column=1, sticky="w")
+
+        # --- Events ---
+        events_frame = ttk.LabelFrame(root, text="Recent Events")
+        events_frame.pack(fill="both", expand=True, padx=10, pady=5)
+
+        self.events_box = tk.Listbox(events_frame, height=10)
+        self.events_box.pack(fill="both", expand=True)
+
+        # start GUI update loop
+        self.update_gui()
+
+    def update_gui(self):
+        # update overview
+        self.time_label.config(text=f"Sim Time: {self.env.now:.2f}s")
+
+        # update ECU states
+        self.main_ecu_var.set(getattr(self.printer.main_ecu, "state", "N/A"))
+        self.motion_ecu_var.set(getattr(self.printer.motion_ecu, "state", "N/A"))
+        self.thermal_ecu_var.set(getattr(self.printer.thermal_ecu, "state", "N/A"))
+
+        # update hotend
+        hotend_temp = self.printer.print_head.current_temp
+        hotend_target = self.printer.print_head.target_temp
+        self.hotend_bar["value"] = hotend_temp
+        self.hotend_label.config(text=f"{hotend_temp:.1f} / {hotend_target} °C")
+
+        # update bed
+        bed_temp = self.printer.heated_bed.current_temp
+        bed_target = self.printer.heated_bed.target_temp
+        self.bed_bar["value"] = bed_temp
+        self.bed_label.config(text=f"{bed_temp:.1f} / {bed_target} °C")
+
+        # update filament
+        try:
+            self.filament_var.set(f"{self.printer.filament.level:.1f} mm")
+        except:
+            self.filament_var.set("N/A")
+
+        # update events
+        self.events_box.delete(0, tk.END)
+        for e in list(self.printer.event_log)[-8:]:
             if isinstance(e, dict):
-                time_str = f"{e.get('time', '-'):.2f}" if "time" in e else "-"
-                component = str(e.get("component", "-"))
-                evt_type = str(e.get("event_type", "-"))
-                details = e.get("details", "-")
-                if isinstance(details, dict):
-                    details = ", ".join(
-                        f"{k}={round(v,2) if isinstance(v,(int,float)) else v}"
-                        for k, v in details.items()
-                    )
-                ev_tbl.add_row(time_str, component, evt_type, str(details))
+                msg = f"[{e.get('time', '-'):.2f}] {e.get('component')} - {e.get('event_type')}"
             else:
-                ev_tbl.add_row("-", "-", "-", str(e))
+                msg = str(e)
+            self.events_box.insert(tk.END, msg)
 
-    events_panel = Panel(ev_tbl)
-
-    # --- Layout assembly ---
-    layout.split_column(
-        Layout(overview_panel, size=3),
-        Layout(printer_panel, size=12),
-        Layout(events_panel, ratio=1),
-    )
-    return layout
+        # schedule next update
+        self.root.after(200, self.update_gui)
 
 
-# ---------------- Main Application ----------------
+def run_simulation(env, printer, gcode_program):
+    env.process(printer._thermal_control_loop())
+    env.process(run_print_job(env, printer, gcode_program))
+
+    # simulate in steps
+    while env.now < 15:
+        env.run(until=env.now + 0.2)
+        time.sleep(0.2)
+
+
 if __name__ == "__main__":
     env = simpy.Environment()
     printer = CyberPhysicalPrinter(env)
 
-    # Start the thermal control loop
-    env.process(printer._thermal_control_loop())
-
-    # Example G-code program
     gcode_program = [
-        "M104 S200",       # set hotend to 200 °C
-        "M140 S60",        # set bed to 60 °C
-        "G1 X10 Y20 F1000",# move head
-        "G4 P1"            # pause for 1s
+        "M104 S200",
+        "M140 S60",
+        "G1 X10 Y20 F1000",
+        "G4 P1"
     ]
-    env.process(run_print_job(env, printer, gcode_program))
 
-    # Step-by-step simulation with live dashboard
-    step = 0.2  # simulation step size
-    try:
-        with Live(render_dashboard(printer, env), refresh_per_second=10, screen=False) as live:
-            while env.now < 15:  # run for 15s sim-time
-                env.run(until=env.now + step)
-                live.update(render_dashboard(printer, env))
-                time.sleep(step)
-    except KeyboardInterrupt:
-        console.print("[red]Simulation interrupted by user[/red]")
+    root = tk.Tk()
+    gui = PrinterGUI(root, env, printer)
+
+    # run sim in separate thread so GUI stays responsive
+    sim_thread = threading.Thread(target=run_simulation, args=(env, printer, gcode_program), daemon=True)
+    sim_thread.start()
+
+    root.mainloop()
