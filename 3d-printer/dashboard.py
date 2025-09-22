@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 import streamlit as st
-import matplotlib.pyplot as plt
+import plotly.express as px
 from pathlib import Path
 
 # ------------------------------
@@ -40,40 +40,51 @@ def run_dashboard(logfile):
     log = load_log(logfile)
     df = to_dataframe(log)
 
-    # Show raw data
-    with st.expander("📜 Raw Event Log"):
-        st.dataframe(df)
+    # 🔹 KPI Summary
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Total Events", len(df))
+    with col2:
+        st.metric("Unique Components", df['component'].nunique())
+    with col3:
+        st.metric("Event Types", df['event_type'].nunique())
+    with col4:
+        errors = df[df['event_type'].str.contains("ERROR", case=False)]
+        st.metric("Errors", len(errors))
 
-    # --- Event counts ---
-    st.subheader("📊 Event Counts")
-    event_counts = df["event_type"].value_counts()
-    st.bar_chart(event_counts)
+    # 🔹 Event Counts (interactive)
+    st.header("📊 Event Counts")
+    event_counts = df["event_type"].value_counts().reset_index()
+    event_counts.columns = ["event_type", "count"]
+    fig = px.bar(event_counts, x="event_type", y="count", title="Event Counts")
+    st.plotly_chart(fig, use_container_width=True)
 
-    # --- Temperature charts ---
-    st.subheader("🌡️ Temperature Over Time")
+    # 🔹 Temperature Charts (interactive)
+    st.header("🌡️ Temperature Over Time")
     temp_df = extract_temperature_series(df)
     if not temp_df.empty:
-        fig, ax = plt.subplots()
-        for comp in temp_df["component"].unique():
-            subset = temp_df[temp_df["component"] == comp]
-            ax.plot(subset["time"], subset["temp"], label=comp)
-        ax.set_xlabel("Time")
-        ax.set_ylabel("Temperature (°C)")
-        ax.legend()
-        st.pyplot(fig)
+        fig = px.line(temp_df, x="time", y="temp", color="component",
+                      title="Temperature Over Time")
+        st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("No temperature data in log.")
 
-    # --- Utilization stats ---
-    st.subheader("⚙️ ECU State Changes")
-    states = df[df["event_type"] == "STATE_CHANGE"]
+    # 🔹 ECU State Changes (interactive)
+    st.header("⚙️ ECU State Changes")
+    states = df[df["event_type"] == "STATE_CHANGE"].copy()
     if not states.empty:
-        util_counts = states.groupby(["component", "details"]).size()
-        st.write(util_counts)
+        states["details_str"] = states["details"].astype(str)
+        util_counts = states.groupby(["component", "details_str"]).size().reset_index(name="count")
+
+        fig = px.bar(util_counts, x="details_str", y="count", color="component",
+                     title="ECU State Changes")
+        st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("No state change events in log.")
 
-    st.success("✅ Dashboard Loaded Successfully")
+    # 🔹 Raw Event Log
+    st.header("📜 Raw Event Log")
+    st.dataframe(df)
 
 # ------------------------------
 # Entry Point
