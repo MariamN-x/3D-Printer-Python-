@@ -7,12 +7,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
 from mpl_toolkits.mplot3d import Axes3D
-from visualization_3d import PrinterVisualizer3D 
+from visualization_3d import HighSpeedPrinterVisualizer3D 
 import time
 import threading  
 from queue import Queue
 import tkinter as tk
 from tkinter import filedialog
+
 # ==================== PARSER ====================
 
 
@@ -397,8 +398,50 @@ class KinematicModel:
 
 # ==================== MAIN EXECUTION ====================
 
-def analyze_gcode_file_with_visualization_realtime(filename: str):
+def generate_demo_gcode(num_movements=500):
+    """Generate realistic demo G-code"""
+    print(f"Generating demo with {num_movements} movements...")
+    
+    gcode = ["M104 S200", "M140 S60", "G28"]  # Startup commands
+    
+    x, y, z = 0, 0, 0
+    
+    for i in range(num_movements):
+        # Generate realistic printer movements
+        if i % 100 == 0:
+            # Layer change
+            z += 0.2
+            gcode.append(f"G1 Z{z} F300")
+        
+        # Movement pattern
+        angle = (i * 0.1) % (2 * np.pi)
+        radius = 30 + 10 * np.sin(i * 0.05)
+        
+        x = radius * np.cos(angle)
+        y = radius * np.sin(angle)
+        
+        speed = 1500 if i % 20 == 0 else 800  # Faster for non-print moves
+        
+        gcode.append(f"G1 X{x:.2f} Y{y:.2f} Z{z:.2f} F{speed}")
+        
+        # Occasionally add temperature commands
+        if i % 50 == 0:
+            temp = 200 + (i % 20)
+            gcode.append(f"M104 S{temp}")
+    
+    gcode.extend(["M104 S0", "M140 S0", "G28"])  # Shutdown commands
+    return gcode
+
+def analyze_gcode_file_with_visualization_realtime():
     """Real-time visualization that doesn't block the simulation"""
+    # Call the GUI function to select file
+    filename = select_gcode_file_gui()
+    
+    # Check if user selected a file or canceled
+    if not filename:
+        print("No file selected. Operation canceled.")
+        return
+
     try:
         with open(filename, 'r') as file:
             gcode_lines = file.readlines()
@@ -409,7 +452,7 @@ def analyze_gcode_file_with_visualization_realtime(filename: str):
     print(f"Analyzing G-code file: {filename}")
     
     # Initialize visualizer FIRST
-    visualizer = PrinterVisualizer3D()
+    visualizer = HighSpeedPrinterVisualizer3D()
     
     # Process the G-code
     translator = GCodeToInstructions()
@@ -419,8 +462,6 @@ def analyze_gcode_file_with_visualization_realtime(filename: str):
 
     print(f"Lines to process: {len(instructions)}")
     print("\nStarting REAL-TIME 3D visualization...")
-    print("Visualization runs in background while simulation continues!")
-    print("Press Ctrl+C to stop both simulation and visualization")
 
     total_time = 0.0
     total_distance = 0.0
@@ -428,29 +469,26 @@ def analyze_gcode_file_with_visualization_realtime(filename: str):
     current_pos = {'X': 0.0, 'Y': 0.0, 'Z': 0.0}
 
     try:
-        # Create parser instance if needed
-        parser = GCodeParser()  # If you have this class
+        parser = GCodeParser()
         
         for instruction in instructions:
             if instruction['type'].startswith('move_'):
                 move_result = kinematic_model.execute_move(instruction)
                 
-                # Option 1: If parse_direction_string is a class method
+                # Parse direction movements
                 try:
                     direction_movements = GCodeParser.parse_direction_string(move_result['direction'])
                 except:
-                    # Option 2: If it's an instance method
                     try:
                         direction_movements = parser.parse_direction_string(move_result['direction'])
                     except:
-                        # Option 3: Use the standalone function I provided
                         direction_movements = parse_direction_string(move_result['direction'])
                 
                 # Update current position
                 for axis, movement in direction_movements.items():
                     current_pos[axis] += movement
                 
-                # Update visualization (non-blocking)
+                # Update visualization
                 visualizer.update_position(
                     current_pos['X'], 
                     current_pos['Y'], 
@@ -462,10 +500,15 @@ def analyze_gcode_file_with_visualization_realtime(filename: str):
                 total_distance += move_result['distance_3d']
                 move_count += 1
                 
-                time.sleep(0.001)
+                # Small delay for visualization
+                if visualizer.target_speed < 100:  # Only delay for slower speeds
+                    time.sleep(0.001)
                 
                 if move_count % 100 == 0:
                     print(f"Processed {move_count} moves...")
+                    progress = (move_count / len(instructions)) * 100
+                    if hasattr(visualizer, 'update_progress'):
+                        visualizer.update_progress(progress, move_count, total_time, total_distance)
                     
             elif instruction['type'] == 'set_feedrate':
                 time.sleep(0.0005)
@@ -475,27 +518,60 @@ def analyze_gcode_file_with_visualization_realtime(filename: str):
 
     except KeyboardInterrupt:
         print("\nSimulation interrupted by user.")
+        if hasattr(visualizer, 'update_title'):
+            visualizer.update_title("Simulation INTERRUPTED")
     except Exception as e:
         print(f"Error during simulation: {e}")
+        if hasattr(visualizer, 'update_title'):
+            visualizer.update_title(f"Simulation ERROR: {str(e)}")
         import traceback
         traceback.print_exc()
     
     finally:
+        # Calculate final statistics
+        avg_speed = total_distance / total_time if total_time > 0 else 0
+        avg_feedrate = avg_speed * 60 if total_time > 0 else 0
+        
         print("-" * 100)
         print(f"SUMMARY:")
         print(f"Total moves analyzed: {move_count}")
         print(f"Total distance traveled: {total_distance:.2f} mm")
         print(f"Total movement time: {total_time:.2f} seconds")
         if total_time > 0:
-            print(f"Average speed: {total_distance/total_time:.1f} mm/s")
-            print(f"Average feedrate: {(total_distance/total_time)*60:.0f} mm/min")
+            print(f"Average speed: {avg_speed:.1f} mm/s")
+            print(f"Average feedrate: {avg_feedrate:.0f} mm/min")
         print("=" * 100)
         
-        # Keep visualization open
-        visualizer.keep_open()
+        # Display summary on visualization dashboard
+        summary_text = f"""SIMULATION COMPLETE
 
-def analyze_gcode_file_visualization_only(filename: str):
+Summary:
+• Total moves: {move_count}
+• Total distance: {total_distance:.1f} mm
+• Total time: {total_time:.1f} seconds
+• Average speed: {avg_speed:.1f} mm/s
+• Average feedrate: {avg_feedrate:.0f} mm/min
+
+File: {os.path.basename(filename)}
+        """
+        if hasattr(visualizer, 'display_summary'):
+            visualizer.display_summary(summary_text)
+        
+        # Keep visualization open with proper blocking
+        print("Keeping visualization window open...")
+        visualizer.keep_open()
+        print("Visualization window closed. Program continuing...")
+        
+def analyze_gcode_file_visualization_only():
     """Fast visualization without simulation timing"""
+    # Call the GUI function to select file
+    filename = select_gcode_file_gui()
+    
+    # Check if user selected a file or canceled
+    if not filename:
+        print("No file selected. Operation canceled.")
+        return
+
     try:
         with open(filename, 'r') as file:
             gcode_lines = file.readlines()
@@ -505,7 +581,7 @@ def analyze_gcode_file_visualization_only(filename: str):
 
     print(f"Analyzing G-code file: {filename}")
     
-    visualizer = PrinterVisualizer3D()
+    visualizer = HighSpeedPrinterVisualizer3D()
     translator = GCodeToInstructions()
     kinematic_model = KinematicModel()
     instructions = translator.translate_gcode(gcode_lines)
@@ -546,7 +622,6 @@ def analyze_gcode_file_visualization_only(filename: str):
 
 def select_gcode_file_gui():
     """Open a file dialog to select G-code file"""
-    # Create a hidden root window and hide it in the 2nd command
     root = tk.Tk()
     root.withdraw()  
     
@@ -563,46 +638,13 @@ def select_gcode_file_gui():
     
     return file_path
 
-def main():
-    """Main function with options for different visualization modes"""
-    if len(sys.argv) != 2:
-        print("Usage: python gcode_analyzer.py <gcode_file>")
-        print("Example: python gcode_analyzer.py sample.gcode")
-        sys.exit(1)
 
-    filename = sys.argv[1]
-    
-    """Main function with GUI file selection"""
-    # Check if filename was provided as command line argument
-    if len(sys.argv) == 2:
-        filename = sys.argv[1]
-        print(f"Using file from command line: {filename}")
-    else:
-        # Open file selection dialog
-        print("Opening file selection dialog...")
-        filename = select_gcode_file_gui()
-        
-        if not filename:
-            print("No file selected. Exiting.")
-            return
-        
-        print(f"Selected file: {filename}")
-    
-    # Check if file exists
-    if not os.path.exists(filename):
-        print(f"Error: File '{filename}' does not exist.")
-        return
-    
-    # Choose visualization mode
-    print("\nChoose visualization mode:")
-    print("1. Real-time simulation with timing")
-    print("2. Fast visualization only")
-    choice = input("Enter choice (1 or 2): ").strip()
-    
-    if choice == '1':
-        analyze_gcode_file_with_visualization_realtime(filename)
-    else:
-        analyze_gcode_file_visualization_only(filename)        
 
-if __name__ == "__main__":
-    main()
+#==========================Testing section=======================
+# def main():
+#     # select_gcode_file_gui() #testing done
+#     # analyze_gcode_file_with_visualization_realtime() #testing done
+#     # analyze_gcode_file_visualization_only() #testing done
+
+# if __name__ == "__main__":
+#     main()
