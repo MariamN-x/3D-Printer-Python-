@@ -142,3 +142,4 @@ if __name__ == "__main__":
     sim_thread.start()
 
     root.mainloop()
+#trial
