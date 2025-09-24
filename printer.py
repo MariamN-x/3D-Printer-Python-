@@ -7,8 +7,10 @@ from utils import log_event
 import re
 
 class CyberPhysicalPrinter:
-    def __init__(self, env):
+    def __init__(self, env,logger=None):
         self.env = env
+        self.logger=logger 
+        
         self.print_head = Actuator(env, "Print_Head", 1)
         self.heated_bed = Actuator(env, "Heated_Bed", 1)
         self.steppers = Actuator(env, "Steppers", 3)
@@ -22,11 +24,10 @@ class CyberPhysicalPrinter:
         self.filament = simpy.Container(env, init=1000, capacity=1000)
         self.power = simpy.PreemptiveResource(env, capacity=1)
 
-        self.event_log = []
-        
         # NEW: Added printer_resource to coordinate downtime/cleaning with printing
         self.printer_resource = simpy.Resource(env, capacity=1)
-        
+
+        self.event_log = []
         
         # NEW: Position tracking for visualization
         self.current_position = {'X': 0.0, 'Y': 0.0, 'Z': 0.0, 'E': 0.0}
@@ -40,10 +41,9 @@ class CyberPhysicalPrinter:
         env.process(hotend_sensor.run(self.can_bus, self.event_log))
         env.process(bed_sensor.run(self.can_bus, self.event_log))
         env.process(self.sensor_filament())
-        
+
         # NEW: Start maintenance (downtime/cleaning) process
         env.process(self.maintenance_cycle())
-        
 
     def set_visualizer(self, visualizer):
         """Set the visualizer instance for real-time updates"""
@@ -58,7 +58,7 @@ class CyberPhysicalPrinter:
                           {"msg": "Filament runout"})
                 break
 
- # Maintenance/downtime/cleaning cycle
+    # Maintenance/downtime/cleaning cycle
     def maintenance_cycle(self):
         while True:
             # Wait some simulated time between cleanings (e.g., every 500 hours)
@@ -222,6 +222,11 @@ class CyberPhysicalPrinter:
     def _thermal_control_loop(self):
         while True:
             yield self.env.timeout(0.1)
+            if self.print_head.current_temp < self.print_head.target_temp - 1:
+                self.thermal_ecu.set_state("HEATING", self.event_log)
+            else:
+                self.thermal_ecu.set_state("IDLE", self.event_log)
             self.print_head.current_temp += (self.print_head.target_temp - self.print_head.current_temp) * 0.1
             self.heated_bed.current_temp += (self.heated_bed.target_temp - self.heated_bed.current_temp) * 0.05
-            log_event(self.event_log, self.env, "Thermal_ECU", "TEMP_UPDATE",{"hotend": self.print_head.current_temp, "bed": self.heated_bed.current_temp})
+            log_event(self.event_log, self.env, "Thermal_ECU", "TEMP_UPDATE",
+                      {"hotend": self.print_head.current_temp, "bed": self.heated_bed.current_temp})
