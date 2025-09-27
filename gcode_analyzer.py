@@ -149,7 +149,6 @@ class GCodeToInstructions:
         """Process G0/G1 linear movement with proper distance calculation"""
         target_position = self.parser.current_position.copy()
 
-        # Handle absolute vs relative positioning
         for axis in ['X', 'Y', 'Z', 'E']:
             if axis in command:
                 if axis == 'E':
@@ -161,23 +160,13 @@ class GCodeToInstructions:
                     else:
                         target_position[axis_index] += command[axis]
 
-        # Use current feedrate if not specified in this command
         current_feedrate = self.parser.current_feedrate
         if 'F' in command:
             current_feedrate = command['F']
 
-        # Calculate distances
-        distance_3d = self._calculate_euclidean_distance(
-            self.parser.current_position,
-            target_position
-        )
+        distance_3d = self._calculate_euclidean_distance(self.parser.current_position,target_position)
+        distance_2d = self._calculate_2d_distance(self.parser.current_position,target_position)
 
-        distance_2d = self._calculate_2d_distance(
-            self.parser.current_position,
-            target_position
-        )
-
-        # Calculate move time
         move_time = 0.0
         if distance_3d > 0 and current_feedrate > 0:
             move_time = (distance_3d / current_feedrate) * 60.0
@@ -198,7 +187,6 @@ class GCodeToInstructions:
             'line': line_num
         }
 
-        # Update feedrate for future commands
         if 'F' in command:
             self.parser.current_feedrate = command['F']
 
@@ -217,10 +205,7 @@ class GCodeToInstructions:
                 else:
                     target_position[axis_index] += command[axis]
 
-        distance_3d = self._calculate_euclidean_distance(
-            self.parser.current_position,
-            target_position
-        )
+        distance_3d = self._calculate_euclidean_distance(self.parser.current_positiontarget_position)
 
         current_feedrate = self.parser.current_feedrate
         if 'F' in command:
@@ -302,7 +287,6 @@ class KinematicModel:
         if distance_3d == 0:
             return self._no_movement_output(instruction)
 
-        # Handle zero feedrate - use a default or previous feedrate
         if feedrate <= 0:
             if self.current_feedrate > 0:
                 feedrate = self.current_feedrate  # Use previous feedrate
@@ -314,7 +298,6 @@ class KinematicModel:
         dy = instruction['delta_y']
         dz = instruction['delta_z']
 
-        # Determine primary direction with magnitudes
         directions = []
         if abs(dx) > 0:
             dir_type = "positive" if dx > 0 else "negative"
@@ -329,8 +312,7 @@ class KinematicModel:
         direction_str = "+".join(directions) if directions else "no_movement"
 
         # Calculate move time with acceleration consideration
-        move_time = self._calculate_move_time_with_acceleration(
-            distance_3d, feedrate)
+        move_time = self._calculate_move_time_with_acceleration(distance_3d, feedrate)
 
         # Update current position and feedrate
         self.current_position = target.copy()
@@ -357,14 +339,8 @@ class KinematicModel:
             return 0.0
 
         feedrate_mm_s = feedrate / 60.0
-
-        # Time to accelerate to maximum speed
         acceleration_time = feedrate_mm_s / self.max_acceleration
-
-        # Distance covered during acceleration
         acceleration_distance = 0.5 * self.max_acceleration * acceleration_time ** 2
-
-        # Check if we can reach maximum speed
         if 2 * acceleration_distance > distance:
             # Triangular velocity profile
             total_time = 2 * math.sqrt(distance / self.max_acceleration)
@@ -432,16 +408,28 @@ def generate_demo_gcode(num_movements=500):
     gcode.extend(["M104 S0", "M140 S0", "G28"])  # Shutdown commands
     return gcode
 
-def analyze_gcode_file_with_visualization_realtime():
-    """Real-time visualization that doesn't block the simulation"""
-    # Call the GUI function to select file
+def gcode_for_simulation() -> list:
     filename = select_gcode_file_gui()
+    if not filename:
+        print("No file selected. Operation canceled.")
+        return []  
+    try:
+        with open(filename, 'r') as file:
+            gcode_lines = file.readlines()
+            gcode_lines = [line.strip() for line in gcode_lines if line.strip()]
+            return gcode_lines
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
+        return []  
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        return []  
     
-    # Check if user selected a file or canceled
+def analyze_gcode_file_with_visualization_realtime():
+    filename = select_gcode_file_gui()
     if not filename:
         print("No file selected. Operation canceled.")
         return
-
     try:
         with open(filename, 'r') as file:
             gcode_lines = file.readlines()
@@ -451,10 +439,8 @@ def analyze_gcode_file_with_visualization_realtime():
 
     print(f"Analyzing G-code file: {filename}")
     
-    # Initialize visualizer FIRST
     visualizer = HighSpeedPrinterVisualizer3D()
     
-    # Process the G-code
     translator = GCodeToInstructions()
     kinematic_model = KinematicModel()
 
@@ -562,63 +548,6 @@ File: {os.path.basename(filename)}
         visualizer.keep_open()
         print("Visualization window closed. Program continuing...")
         
-def analyze_gcode_file_visualization_only():
-    """Fast visualization without simulation timing"""
-    # Call the GUI function to select file
-    filename = select_gcode_file_gui()
-    
-    # Check if user selected a file or canceled
-    if not filename:
-        print("No file selected. Operation canceled.")
-        return
-
-    try:
-        with open(filename, 'r') as file:
-            gcode_lines = file.readlines()
-    except FileNotFoundError:
-        print(f"Error: File '{filename}' not found.")
-        return
-
-    print(f"Analyzing G-code file: {filename}")
-    
-    visualizer = HighSpeedPrinterVisualizer3D()
-    translator = GCodeToInstructions()
-    kinematic_model = KinematicModel()
-    instructions = translator.translate_gcode(gcode_lines)
-
-    print(f"Lines to process: {len(instructions)}")
-    print("\nGenerating 3D visualization...")
-
-    current_pos = {'X': 0.0, 'Y': 0.0, 'Z': 0.0}
-    move_count = 0
-
-    try:
-        for instruction in instructions:
-            if instruction['type'].startswith('move_'):
-                move_result = kinematic_model.execute_move(instruction)
-                direction_movements = parse_direction_string(move_result['direction'])
-                
-                for axis, movement in direction_movements.items():
-                    current_pos[axis] += movement
-                
-                visualizer.update_position(
-                    current_pos['X'], current_pos['Y'], current_pos['Z'],
-                    move_result['movement_type']
-                )
-                
-                move_count += 1
-                
-                if move_count % 10 == 0:
-                    time.sleep(0.001)
-                
-                if move_count % 500 == 0:
-                    print(f"Processed {move_count} moves...")
-                    
-    except KeyboardInterrupt:
-        print("\nVisualization interrupted.")
-
-    print(f"Completed: {move_count} moves visualized")
-    visualizer.keep_open()
 
 def select_gcode_file_gui():
     """Open a file dialog to select G-code file"""
@@ -637,6 +566,43 @@ def select_gcode_file_gui():
     root.destroy()
     
     return file_path
+
+def load_gcode_to_list_advanced(file_path=None, remove_comments=True, skip_empty_lines=True):
+
+    if file_path is None:
+        file_path = select_gcode_file_gui()
+    
+    if not file_path:
+        return []
+    
+    try:
+        with open(file_path, 'r') as file:
+            gcode_lines = file.readlines()
+        
+        gcode_program = []
+        for line in gcode_lines:
+            original_line = line.strip()
+            processed_line = original_line
+            
+            if remove_comments and ';' in processed_line:
+                processed_line = processed_line.split(';')[0].strip()
+            
+            if skip_empty_lines and not processed_line:
+                continue
+            
+            # Skip pure comment lines if requested
+            if remove_comments and processed_line.startswith(';'):
+                continue
+            
+            # Add the processed line
+            if processed_line:
+                gcode_program.append(processed_line)
+        
+        print(f"Loaded {len(gcode_program)} G-code commands from {file_path}")
+        return gcode_program
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        return []
 
 
 

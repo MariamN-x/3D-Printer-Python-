@@ -44,9 +44,8 @@ class CyberPhysicalPrinter:
 
         # NEW: Start maintenance (downtime/cleaning) process
         env.process(self.maintenance_cycle())
-
+        env.process(self._thermal_control_loop())
     def set_visualizer(self, visualizer):
-        """Set the visualizer instance for real-time updates"""
         self.visualizer = visualizer
 
     def sensor_filament(self):
@@ -55,21 +54,18 @@ class CyberPhysicalPrinter:
             if self.filament.level <= 0:
                 self.main_ecu.set_state("ERROR", self.event_log)
                 log_event(self.event_log, self.env, "Filament_Sensor", "FAULT",
-                          {"msg": "Filament runout"})
+                            {"msg": "Filament runout"})
                 break
 
     # Maintenance/downtime/cleaning cycle
     def maintenance_cycle(self):
         while True:
-            # Wait some simulated time between cleanings (e.g., every 500 hours)
-            yield self.env.timeout(500 * 60 * 60)  # 500 hours in seconds
-
-            # Announce and log downtime
+            yield self.env.timeout(500 * 60 * 60)  # every 500 hours
             log_event(self.event_log, self.env, "Maintenance", "START", {"msg": "Scheduled cleaning/maintenance"})
             self.main_ecu.set_state("MAINTENANCE", self.event_log)
 
             # Block the printer for cleaning time (e.g., 20 minutes)
-            cleaning_time = 20 * 60  # 30 minutes in seconds
+            cleaning_time = 20 * 60  # 20 minutes in seconds
             with self.printer_resource.request() as req:
                 yield req
                 yield self.env.timeout(cleaning_time)
@@ -99,14 +95,11 @@ class CyberPhysicalPrinter:
                     yield mreq
                     self.motion_ecu.set_state("MOVING", self.event_log)
                     
-                    # NEW: Update position and visualize
                     old_position = self.current_position.copy()
-                    self._update_position(params)
+                    yield from self._update_position(params)
                     
                     # Calculate movement type (rapid vs print)
                     movement_type = "RAPID" if gcode.startswith("G0") else "PRINT"
-                    
-                    # Update visualization if available
                     if self.visualizer:
                         self.visualizer.update_position(
                             self.current_position['X'],
@@ -142,20 +135,17 @@ class CyberPhysicalPrinter:
 
             elif gcode.startswith("G90"):
                 self.relative_positioning = False
-                log_event(self.event_log, self.env, "Motion_ECU", "MODE_CHANGE",
-                          {"mode": "Absolute positioning"})
+                log_event(self.event_log, self.env, "Motion_ECU", "MODE_CHANGE", {"mode": "Absolute positioning"})
 
             elif gcode.startswith("G91"):
                 self.relative_positioning = True
-                log_event(self.event_log, self.env, "Motion_ECU", "MODE_CHANGE",
-                          {"mode": "Relative positioning"})
+                log_event(self.event_log, self.env, "Motion_ECU", "MODE_CHANGE", {"mode": "Relative positioning"})
 
             elif gcode.startswith("G28"):
                 # Home all axes
                 self.current_position = {'X': 0.0, 'Y': 0.0, 'Z': 0.0, 'E': 0.0}
-                log_event(self.event_log, self.env, "Motion_ECU", "HOMING",
-                          {"command": gcode})
-                yield self.env.timeout(2.0)  # Homing time
+                log_event(self.event_log, self.env, "Motion_ECU", "HOMING", {"command": gcode})
+                yield self.env.timeout(2.0)
 
             elif gcode.startswith("G92"):
                 # Set position
@@ -181,13 +171,32 @@ class CyberPhysicalPrinter:
         return params
 
     def _update_position(self, params):
-        """Update current position based on movement parameters"""
+        """Update position and consume filament if extrusion is involved"""
         for axis in params:
             if axis in self.current_position:
-                if self.relative_positioning:
-                    self.current_position[axis] += params[axis]
+                if axis == 'E':
+                    delta_e = params['E'] if self.relative_positioning else params['E'] - self.current_position['E']
+                    delta_e = max(0, delta_e)
+
+                    if delta_e > 0:
+                        if self.filament.level >= delta_e:
+                            yield self.filament.get(delta_e)
+                        else:
+                            delta_e = self.filament.level
+                            yield self.filament.get(delta_e)
+                            self.main_ecu.set_state("ERROR", self.event_log)
+                            log_event(self.event_log, self.env, "Filament", "FAULT",
+                                      {"msg": "Filament runout"})
+
+                    if self.relative_positioning:
+                        self.current_position['E'] += delta_e
+                    else:
+                        self.current_position['E'] = params['E']
                 else:
-                    self.current_position[axis] = params[axis]
+                    if self.relative_positioning:
+                        self.current_position[axis] += params[axis]
+                    else:
+                        self.current_position[axis] = params[axis]
 
     def _calculate_move_time(self, params):
         """Calculate move time based on distance and feedrate"""
@@ -204,17 +213,19 @@ class CyberPhysicalPrinter:
                     distance += abs(params[axis] - self.current_position.get(axis, 0))
         
         # Scale time based on distance (min 0.1s, max 2.0s)
-        move_time = max(0.1, min(2.0, base_time * (distance / 10.0)))
+        extrusion = 0
+        if 'E' in params:
+            extrusion = params['E'] if self.relative_positioning else params['E'] - self.current_position['E']
+        extrusion_time = 0.1 * extrusion if extrusion > 0 else 0
+        move_time = max(0.1, min(2.0, base_time * (distance / 10.0) + extrusion_time))        
         return move_time
 
     def _parse_temperature(self, gcode):
-        """Parse temperature from M104/M140 commands"""
         pattern = r'S(\d+)'
         match = re.search(pattern, gcode)
         return float(match.group(1)) if match else (200 if 'M104' in gcode else 60)
 
     def _parse_dwell_time(self, gcode):
-        """Parse dwell time from G4 commands"""
         pattern = r'P(\d+\.?\d*)'
         match = re.search(pattern, gcode)
         return float(match.group(1)) if match else 1.0
