@@ -1,0 +1,466 @@
+{"time": 0.0, "component": "Main_ECU", "event_type": "STATE_CHANGE", "details": {"from": "IDLE", "to": "PROCESSING"}}
+{"time": 0.0037061003932390285, "component": "Thermal_ECU", "event_type": "SET_TARGET", "details": {"hotend_target": 200.0}}
+{"time": 0.0037061003932390285, "component": "Main_ECU", "event_type": "STATE_CHANGE", "details": {"from": "PROCESSING", "to": "IDLE"}}
+{"time": 0.0037061003932390285, "component": "Main_ECU", "event_type": "STATE_CHANGE", "details": {"from": "IDLE", "to": "PROCESSING"}}
+{"time": 0.005177774588408285, "component": "Thermal_ECU", "event_type": "SET_TARGET", "details": {"bed_target": 60.0}}
+{"time": 0.005177774588408285, "component": "Main_ECU", "event_type": "STATE_CHANGE", "details": {"from": "PROCESSING", "to": "IDLE"}}
+{"time": 0.005177774588408285, "component": "Main_ECU", "event_type": "STATE_CHANGE", "details": {"from": "IDLE", "to": "PROCESSING"}}
+{"time": 0.0069026837573322244, "component": "Motion_ECU", "event_type": "STATE_CHANGE", "details": {"from": "IDLE", "to": "MOVING"}}
+{"time": 0.1, "component": "Thermal_ECU", "event_type": "STATE_CHANGE", "details": {"from": "IDLE", "to": "HEATING"}}
+{"time": 0.1, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 42.5, "bed": 26.75}}
+{"time": 0.1, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 25}}
+{"time": 0.1, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 25}}
+{"time": 0.2, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 58.25, "bed": 28.4125}}
+{"time": 0.2, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.25}}
+{"time": 0.2, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 28.4125}}
+{"time": 0.30000000000000004, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 72.425, "bed": 29.991875}}
+{"time": 0.30000000000000004, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 72.425}}
+{"time": 0.30000000000000004, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 29.991875}}
+{"time": 0.4, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 85.1825, "bed": 31.49228125}}
+{"time": 0.4, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 85.1825}}
+{"time": 0.4, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 31.49228125}}
+{"time": 0.5, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 96.66425000000001, "bed": 32.9176671875}}
+{"time": 0.5, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 96.66425000000001}}
+{"time": 0.5, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 32.9176671875}}
+{"time": 0.6, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 106.997825, "bed": 34.271783828125}}
+{"time": 0.6, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 106.997825}}
+{"time": 0.6, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 34.271783828125}}
+{"time": 0.7, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 116.29804250000001, "bed": 35.55819463671875}}
+{"time": 0.7, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 116.29804250000001}}
+{"time": 0.7, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 35.55819463671875}}
+{"time": 0.7999999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 124.66823825, "bed": 36.78028490488281}}
+{"time": 0.7999999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 124.66823825}}
+{"time": 0.7999999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 36.78028490488281}}
+{"time": 0.8999999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 132.201414425, "bed": 37.94127065963867}}
+{"time": 0.8999999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 132.201414425}}
+{"time": 0.8999999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 37.94127065963867}}
+{"time": 0.9999999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 138.9812729825, "bed": 39.04420712665674}}
+{"time": 0.9999999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 138.9812729825}}
+{"time": 0.9999999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 39.04420712665674}}
+{"time": 1.0999999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 145.08314568425, "bed": 40.0919967703239}}
+{"time": 1.0999999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 145.08314568425}}
+{"time": 1.0999999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 40.0919967703239}}
+{"time": 1.2, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 150.57483111582502, "bed": 41.08739693180771}}
+{"time": 1.2, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 150.57483111582502}}
+{"time": 1.2, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 41.08739693180771}}
+{"time": 1.3, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 155.5173480042425, "bed": 42.03302708521733}}
+{"time": 1.3, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 155.5173480042425}}
+{"time": 1.3, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 42.03302708521733}}
+{"time": 1.4000000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 159.96561320381826, "bed": 42.93137573095646}}
+{"time": 1.4000000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 159.96561320381826}}
+{"time": 1.4000000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 42.93137573095646}}
+{"time": 1.5000000000000002, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 163.96905188343644, "bed": 43.784806944408636}}
+{"time": 1.5000000000000002, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 163.96905188343644}}
+{"time": 1.5000000000000002, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 43.784806944408636}}
+{"time": 1.5069026837573323, "component": "Motion_ECU", "event_type": "STATE_CHANGE", "details": {"from": "MOVING", "to": "IDLE"}}
+{"time": 1.5069026837573323, "component": "Motion_ECU", "event_type": "cmd_sent", "details": {"command": "G1 X10 Y20 F1000", "move_time": 1.5, "from": {"X": 0.0, "Y": 0.0, "Z": 0.0, "E": 0.0}, "to": {"X": 10.0, "Y": 20.0, "Z": 0.0, "E": 0.0}}}
+{"time": 1.5069026837573323, "component": "Main_ECU", "event_type": "STATE_CHANGE", "details": {"from": "PROCESSING", "to": "IDLE"}}
+{"time": 1.5069026837573323, "component": "Main_ECU", "event_type": "STATE_CHANGE", "details": {"from": "IDLE", "to": "PROCESSING"}}
+{"time": 1.6000000000000003, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 167.57214669509278, "bed": 44.5955665971882}}
+{"time": 1.6000000000000003, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 167.57214669509278}}
+{"time": 1.6000000000000003, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 44.5955665971882}}
+{"time": 1.7000000000000004, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 170.81493202558352, "bed": 45.365788267328796}}
+{"time": 1.7000000000000004, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 170.81493202558352}}
+{"time": 1.7000000000000004, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 45.365788267328796}}
+{"time": 1.8000000000000005, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 173.73343882302515, "bed": 46.09749885396236}}
+{"time": 1.8000000000000005, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 173.73343882302515}}
+{"time": 1.8000000000000005, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 46.09749885396236}}
+{"time": 1.9000000000000006, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 176.36009494072263, "bed": 46.792623911264236}}
+{"time": 1.9000000000000006, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 176.36009494072263}}
+{"time": 1.9000000000000006, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 46.792623911264236}}
+{"time": 2.0000000000000004, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 178.72408544665038, "bed": 47.45299271570102}}
+{"time": 2.0000000000000004, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 178.72408544665038}}
+{"time": 2.0000000000000004, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 47.45299271570102}}
+{"time": 2.1000000000000005, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 180.85167690198534, "bed": 48.08034307991597}}
+{"time": 2.1000000000000005, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 180.85167690198534}}
+{"time": 2.1000000000000005, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 48.08034307991597}}
+{"time": 2.2000000000000006, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 182.7665092117868, "bed": 48.676325925920175}}
+{"time": 2.2000000000000006, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 182.7665092117868}}
+{"time": 2.2000000000000006, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 48.676325925920175}}
+{"time": 2.3000000000000007, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 184.4898582906081, "bed": 49.242509629624166}}
+{"time": 2.3000000000000007, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 184.4898582906081}}
+{"time": 2.3000000000000007, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 49.242509629624166}}
+{"time": 2.400000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 186.0408724615473, "bed": 49.78038414814296}}
+{"time": 2.400000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 186.0408724615473}}
+{"time": 2.400000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 49.78038414814296}}
+{"time": 2.500000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 187.43678521539258, "bed": 50.29136494073581}}
+{"time": 2.500000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 187.43678521539258}}
+{"time": 2.500000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 50.29136494073581}}
+{"time": 2.50968458866425, "component": "Main_ECU", "event_type": "DWELL", "details": {"command": "G4 P1", "duration": 1.0}}
+{"time": 2.50968458866425, "component": "Main_ECU", "event_type": "STATE_CHANGE", "details": {"from": "PROCESSING", "to": "IDLE"}}
+{"time": 2.600000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 188.6931066938533, "bed": 50.77679669369902}}
+{"time": 2.600000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 188.6931066938533}}
+{"time": 2.600000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 50.77679669369902}}
+{"time": 2.700000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 189.82379602446798, "bed": 51.23795685901407}}
+{"time": 2.700000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 189.82379602446798}}
+{"time": 2.700000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 51.23795685901407}}
+{"time": 2.800000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 190.84141642202118, "bed": 51.67605901606336}}
+{"time": 2.800000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 190.84141642202118}}
+{"time": 2.800000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 51.67605901606336}}
+{"time": 2.9000000000000012, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 191.75727477981906, "bed": 52.092256065260194}}
+{"time": 2.9000000000000012, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 191.75727477981906}}
+{"time": 2.9000000000000012, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 52.092256065260194}}
+{"time": 3.0000000000000013, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 192.58154730183716, "bed": 52.487643261997185}}
+{"time": 3.0000000000000013, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 192.58154730183716}}
+{"time": 3.0000000000000013, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 52.487643261997185}}
+{"time": 3.1000000000000014, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 193.32339257165344, "bed": 52.863261098897325}}
+{"time": 3.1000000000000014, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 193.32339257165344}}
+{"time": 3.1000000000000014, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 52.863261098897325}}
+{"time": 3.2000000000000015, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 193.9910533144881, "bed": 53.22009804395246}}
+{"time": 3.2000000000000015, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 193.9910533144881}}
+{"time": 3.2000000000000015, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 53.22009804395246}}
+{"time": 3.3000000000000016, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 194.5919479830393, "bed": 53.559093141754836}}
+{"time": 3.3000000000000016, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 194.5919479830393}}
+{"time": 3.3000000000000016, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 53.559093141754836}}
+{"time": 3.4000000000000017, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 195.13275318473535, "bed": 53.8811384846671}}
+{"time": 3.4000000000000017, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 195.13275318473535}}
+{"time": 3.4000000000000017, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 53.8811384846671}}
+{"time": 3.5000000000000018, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 195.6194778662618, "bed": 54.18708156043374}}
+{"time": 3.5000000000000018, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 195.6194778662618}}
+{"time": 3.5000000000000018, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 54.18708156043374}}
+{"time": 3.600000000000002, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 196.05753007963563, "bed": 54.47772748241205}}
+{"time": 3.600000000000002, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 196.05753007963563}}
+{"time": 3.600000000000002, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 54.47772748241205}}
+{"time": 3.700000000000002, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 196.45177707167207, "bed": 54.75384110829145}}
+{"time": 3.700000000000002, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 196.45177707167207}}
+{"time": 3.700000000000002, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 54.75384110829145}}
+{"time": 3.800000000000002, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 196.80659936450485, "bed": 55.01614905287688}}
+{"time": 3.800000000000002, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 196.80659936450485}}
+{"time": 3.800000000000002, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 55.01614905287688}}
+{"time": 3.900000000000002, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 197.12593942805435, "bed": 55.265341600233036}}
+{"time": 3.900000000000002, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 197.12593942805435}}
+{"time": 3.900000000000002, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 55.265341600233036}}
+{"time": 4.000000000000002, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 197.41334548524893, "bed": 55.502074520221385}}
+{"time": 4.000000000000002, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 197.41334548524893}}
+{"time": 4.000000000000002, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 55.502074520221385}}
+{"time": 4.100000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 197.67201093672404, "bed": 55.72697079421032}}
+{"time": 4.100000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 197.67201093672404}}
+{"time": 4.100000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 55.72697079421032}}
+{"time": 4.200000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 197.90480984305162, "bed": 55.9406222544998}}
+{"time": 4.200000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 197.90480984305162}}
+{"time": 4.200000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 55.9406222544998}}
+{"time": 4.300000000000001, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 198.11432885874646, "bed": 56.14359114177481}}
+{"time": 4.300000000000001, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 198.11432885874646}}
+{"time": 4.300000000000001, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 56.14359114177481}}
+{"time": 4.4, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 198.30289597287182, "bed": 56.336411584686076}}
+{"time": 4.4, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 198.30289597287182}}
+{"time": 4.4, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 56.336411584686076}}
+{"time": 4.5, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 198.47260637558463, "bed": 56.51959100545177}}
+{"time": 4.5, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 198.47260637558463}}
+{"time": 4.5, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 56.51959100545177}}
+{"time": 4.6, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 198.62534573802617, "bed": 56.69361145517918}}
+{"time": 4.6, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 198.62534573802617}}
+{"time": 4.6, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 56.69361145517918}}
+{"time": 4.699999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 198.76281116422356, "bed": 56.858930882420225}}
+{"time": 4.699999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 198.76281116422356}}
+{"time": 4.699999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 56.858930882420225}}
+{"time": 4.799999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 198.88653004780122, "bed": 57.01598433829921}}
+{"time": 4.799999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 198.88653004780122}}
+{"time": 4.799999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 57.01598433829921}}
+{"time": 4.899999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 198.9978770430211, "bed": 57.165185121384255}}
+{"time": 4.899999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 198.9978770430211}}
+{"time": 4.899999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 57.165185121384255}}
+{"time": 4.999999999999998, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.098089338719, "bed": 57.306925865315044}}
+{"time": 4.999999999999998, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.098089338719}}
+{"time": 4.999999999999998, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 57.306925865315044}}
+{"time": 5.099999999999998, "component": "Thermal_ECU", "event_type": "STATE_CHANGE", "details": {"from": "HEATING", "to": "IDLE"}}
+{"time": 5.099999999999998, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.1882804048471, "bed": 57.44157957204929}}
+{"time": 5.099999999999998, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.1882804048471}}
+{"time": 5.099999999999998, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 57.44157957204929}}
+{"time": 5.1999999999999975, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.2694523643624, "bed": 57.569500593446826}}
+{"time": 5.1999999999999975, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.2694523643624}}
+{"time": 5.1999999999999975, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 57.569500593446826}}
+{"time": 5.299999999999997, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.34250712792615, "bed": 57.69102556377448}}
+{"time": 5.299999999999997, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.34250712792615}}
+{"time": 5.299999999999997, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 57.69102556377448}}
+{"time": 5.399999999999997, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.40825641513354, "bed": 57.80647428558576}}
+{"time": 5.399999999999997, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.40825641513354}}
+{"time": 5.399999999999997, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 57.80647428558576}}
+{"time": 5.4999999999999964, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.46743077362018, "bed": 57.91615057130647}}
+{"time": 5.4999999999999964, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.46743077362018}}
+{"time": 5.4999999999999964, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 57.91615057130647}}
+{"time": 5.599999999999996, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.52068769625816, "bed": 58.020343042741146}}
+{"time": 5.599999999999996, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.52068769625816}}
+{"time": 5.599999999999996, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.020343042741146}}
+{"time": 5.699999999999996, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.56861892663235, "bed": 58.11932589060409}}
+{"time": 5.699999999999996, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.56861892663235}}
+{"time": 5.699999999999996, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.11932589060409}}
+{"time": 5.799999999999995, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.61175703396913, "bed": 58.213359596073886}}
+{"time": 5.799999999999995, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.61175703396913}}
+{"time": 5.799999999999995, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.213359596073886}}
+{"time": 5.899999999999995, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.6505813305722, "bed": 58.302691616270195}}
+{"time": 5.899999999999995, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.6505813305722}}
+{"time": 5.899999999999995, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.302691616270195}}
+{"time": 5.999999999999995, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.68552319751498, "bed": 58.38755703545669}}
+{"time": 5.999999999999995, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.68552319751498}}
+{"time": 5.999999999999995, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.38755703545669}}
+{"time": 6.099999999999994, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.7169708777635, "bed": 58.46817918368385}}
+{"time": 6.099999999999994, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.7169708777635}}
+{"time": 6.099999999999994, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.46817918368385}}
+{"time": 6.199999999999994, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.74527378998715, "bed": 58.54477022449966}}
+{"time": 6.199999999999994, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.74527378998715}}
+{"time": 6.199999999999994, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.54477022449966}}
+{"time": 6.299999999999994, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.77074641098844, "bed": 58.61753171327467}}
+{"time": 6.299999999999994, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.77074641098844}}
+{"time": 6.299999999999994, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.61753171327467}}
+{"time": 6.399999999999993, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.79367176988958, "bed": 58.68665512761094}}
+{"time": 6.399999999999993, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.79367176988958}}
+{"time": 6.399999999999993, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.68665512761094}}
+{"time": 6.499999999999993, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.8143045929006, "bed": 58.75232237123039}}
+{"time": 6.499999999999993, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.8143045929006}}
+{"time": 6.499999999999993, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.75232237123039}}
+{"time": 6.5999999999999925, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.83287413361055, "bed": 58.81470625266887}}
+{"time": 6.5999999999999925, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.83287413361055}}
+{"time": 6.5999999999999925, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.81470625266887}}
+{"time": 6.699999999999992, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.84958672024948, "bed": 58.87397094003543}}
+{"time": 6.699999999999992, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.84958672024948}}
+{"time": 6.699999999999992, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.87397094003543}}
+{"time": 6.799999999999992, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.86462804822452, "bed": 58.930272393033654}}
+{"time": 6.799999999999992, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.86462804822452}}
+{"time": 6.799999999999992, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.930272393033654}}
+{"time": 6.8999999999999915, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.87816524340207, "bed": 58.98375877338197}}
+{"time": 6.8999999999999915, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.87816524340207}}
+{"time": 6.8999999999999915, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 58.98375877338197}}
+{"time": 6.999999999999991, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.89034871906185, "bed": 59.03457083471287}}
+{"time": 6.999999999999991, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.89034871906185}}
+{"time": 6.999999999999991, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.03457083471287}}
+{"time": 7.099999999999991, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.90131384715568, "bed": 59.08284229297723}}
+{"time": 7.099999999999991, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.90131384715568}}
+{"time": 7.099999999999991, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.08284229297723}}
+{"time": 7.19999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9111824624401, "bed": 59.12870017832837}}
+{"time": 7.19999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9111824624401}}
+{"time": 7.19999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.12870017832837}}
+{"time": 7.29999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9200642161961, "bed": 59.17226516941196}}
+{"time": 7.29999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9200642161961}}
+{"time": 7.29999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.17226516941196}}
+{"time": 7.39999999999999, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9280577945765, "bed": 59.21365191094136}}
+{"time": 7.39999999999999, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9280577945765}}
+{"time": 7.39999999999999, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.21365191094136}}
+{"time": 7.499999999999989, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.93525201511883, "bed": 59.25296931539429}}
+{"time": 7.499999999999989, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.93525201511883}}
+{"time": 7.499999999999989, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.25296931539429}}
+{"time": 7.599999999999989, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.94172681360695, "bed": 59.29032084962457}}
+{"time": 7.599999999999989, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.94172681360695}}
+{"time": 7.599999999999989, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.29032084962457}}
+{"time": 7.699999999999989, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.94755413224624, "bed": 59.32580480714334}}
+{"time": 7.699999999999989, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.94755413224624}}
+{"time": 7.699999999999989, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.32580480714334}}
+{"time": 7.799999999999988, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.95279871902162, "bed": 59.359514566786174}}
+{"time": 7.799999999999988, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.95279871902162}}
+{"time": 7.799999999999988, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.359514566786174}}
+{"time": 7.899999999999988, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.95751884711945, "bed": 59.39153883844686}}
+{"time": 7.899999999999988, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.95751884711945}}
+{"time": 7.899999999999988, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.39153883844686}}
+{"time": 7.999999999999988, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9617669624075, "bed": 59.42196189652452}}
+{"time": 7.999999999999988, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9617669624075}}
+{"time": 7.999999999999988, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.42196189652452}}
+{"time": 8.099999999999987, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.96559026616674, "bed": 59.4508638016983}}
+{"time": 8.099999999999987, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.96559026616674}}
+{"time": 8.099999999999987, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.4508638016983}}
+{"time": 8.199999999999987, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.96903123955008, "bed": 59.478320611613384}}
+{"time": 8.199999999999987, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.96903123955008}}
+{"time": 8.199999999999987, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.478320611613384}}
+{"time": 8.299999999999986, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.97212811559507, "bed": 59.504404581032716}}
+{"time": 8.299999999999986, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.97212811559507}}
+{"time": 8.299999999999986, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.504404581032716}}
+{"time": 8.399999999999986, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.97491530403556, "bed": 59.52918435198108}}
+{"time": 8.399999999999986, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.97491530403556}}
+{"time": 8.399999999999986, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.52918435198108}}
+{"time": 8.499999999999986, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.977423773632, "bed": 59.55272513438202}}
+{"time": 8.499999999999986, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.977423773632}}
+{"time": 8.499999999999986, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.55272513438202}}
+{"time": 8.599999999999985, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9796813962688, "bed": 59.57508887766292}}
+{"time": 8.599999999999985, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9796813962688}}
+{"time": 8.599999999999985, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.57508887766292}}
+{"time": 8.699999999999985, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9817132566419, "bed": 59.596334433779774}}
+{"time": 8.699999999999985, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9817132566419}}
+{"time": 8.699999999999985, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.596334433779774}}
+{"time": 8.799999999999985, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9835419309777, "bed": 59.61651771209078}}
+{"time": 8.799999999999985, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9835419309777}}
+{"time": 8.799999999999985, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.61651771209078}}
+{"time": 8.899999999999984, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.98518773787993, "bed": 59.635691826486244}}
+{"time": 8.899999999999984, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.98518773787993}}
+{"time": 8.899999999999984, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.635691826486244}}
+{"time": 8.999999999999984, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.98666896409193, "bed": 59.65390723516193}}
+{"time": 8.999999999999984, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.98666896409193}}
+{"time": 8.999999999999984, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.65390723516193}}
+{"time": 9.099999999999984, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.98800206768274, "bed": 59.671211873403834}}
+{"time": 9.099999999999984, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.98800206768274}}
+{"time": 9.099999999999984, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.671211873403834}}
+{"time": 9.199999999999983, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.98920186091448, "bed": 59.68765127973364}}
+{"time": 9.199999999999983, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.98920186091448}}
+{"time": 9.199999999999983, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.68765127973364}}
+{"time": 9.299999999999983, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99028167482302, "bed": 59.70326871574696}}
+{"time": 9.299999999999983, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99028167482302}}
+{"time": 9.299999999999983, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.70326871574696}}
+{"time": 9.399999999999983, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99125350734073, "bed": 59.71810527995961}}
+{"time": 9.399999999999983, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99125350734073}}
+{"time": 9.399999999999983, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.71810527995961}}
+{"time": 9.499999999999982, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99212815660667, "bed": 59.73220001596163}}
+{"time": 9.499999999999982, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99212815660667}}
+{"time": 9.499999999999982, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.73220001596163}}
+{"time": 9.599999999999982, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.992915340946, "bed": 59.74559001516355}}
+{"time": 9.599999999999982, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.992915340946}}
+{"time": 9.599999999999982, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.74559001516355}}
+{"time": 9.699999999999982, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99362380685142, "bed": 59.75831051440537}}
+{"time": 9.699999999999982, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99362380685142}}
+{"time": 9.699999999999982, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.75831051440537}}
+{"time": 9.799999999999981, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99426142616628, "bed": 59.770394988685105}}
+{"time": 9.799999999999981, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99426142616628}}
+{"time": 9.799999999999981, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.770394988685105}}
+{"time": 9.89999999999998, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99483528354966, "bed": 59.78187523925085}}
+{"time": 9.89999999999998, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99483528354966}}
+{"time": 9.89999999999998, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.78187523925085}}
+{"time": 9.99999999999998, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9953517551947, "bed": 59.79278147728831}}
+{"time": 9.99999999999998, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9953517551947}}
+{"time": 9.99999999999998, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.79278147728831}}
+{"time": 10.09999999999998, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99581657967522, "bed": 59.80314240342389}}
+{"time": 10.09999999999998, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99581657967522}}
+{"time": 10.09999999999998, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.80314240342389}}
+{"time": 10.19999999999998, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9962349217077, "bed": 59.812985283252694}}
+{"time": 10.19999999999998, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9962349217077}}
+{"time": 10.19999999999998, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.812985283252694}}
+{"time": 10.29999999999998, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99661142953693, "bed": 59.82233601909006}}
+{"time": 10.29999999999998, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99661142953693}}
+{"time": 10.29999999999998, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.82233601909006}}
+{"time": 10.399999999999979, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99695028658323, "bed": 59.83121921813556}}
+{"time": 10.399999999999979, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99695028658323}}
+{"time": 10.399999999999979, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.83121921813556}}
+{"time": 10.499999999999979, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9972552579249, "bed": 59.83965825722878}}
+{"time": 10.499999999999979, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9972552579249}}
+{"time": 10.499999999999979, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.83965825722878}}
+{"time": 10.599999999999978, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99752973213242, "bed": 59.84767534436734}}
+{"time": 10.599999999999978, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99752973213242}}
+{"time": 10.599999999999978, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.84767534436734}}
+{"time": 10.699999999999978, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99777675891917, "bed": 59.855291577148975}}
+{"time": 10.699999999999978, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99777675891917}}
+{"time": 10.699999999999978, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.855291577148975}}
+{"time": 10.799999999999978, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99799908302725, "bed": 59.86252699829153}}
+{"time": 10.799999999999978, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99799908302725}}
+{"time": 10.799999999999978, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.86252699829153}}
+{"time": 10.899999999999977, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99819917472453, "bed": 59.86940064837695}}
+{"time": 10.899999999999977, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99819917472453}}
+{"time": 10.899999999999977, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.86940064837695}}
+{"time": 10.999999999999977, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99837925725208, "bed": 59.875930615958104}}
+{"time": 10.999999999999977, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99837925725208}}
+{"time": 10.999999999999977, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.875930615958104}}
+{"time": 11.099999999999977, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99854133152687, "bed": 59.882134085160196}}
+{"time": 11.099999999999977, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99854133152687}}
+{"time": 11.099999999999977, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.882134085160196}}
+{"time": 11.199999999999976, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99868719837417, "bed": 59.88802738090219}}
+{"time": 11.199999999999976, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99868719837417}}
+{"time": 11.199999999999976, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.88802738090219}}
+{"time": 11.299999999999976, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99881847853675, "bed": 59.89362601185708}}
+{"time": 11.299999999999976, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99881847853675}}
+{"time": 11.299999999999976, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.89362601185708}}
+{"time": 11.399999999999975, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99893663068306, "bed": 59.89894471126423}}
+{"time": 11.399999999999975, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99893663068306}}
+{"time": 11.399999999999975, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.89894471126423}}
+{"time": 11.499999999999975, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99904296761474, "bed": 59.90399747570102}}
+{"time": 11.499999999999975, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99904296761474}}
+{"time": 11.499999999999975, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.90399747570102}}
+{"time": 11.599999999999975, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99913867085326, "bed": 59.908797601915964}}
+{"time": 11.599999999999975, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99913867085326}}
+{"time": 11.599999999999975, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.908797601915964}}
+{"time": 11.699999999999974, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99922480376793, "bed": 59.91335772182016}}
+{"time": 11.699999999999974, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99922480376793}}
+{"time": 11.699999999999974, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.91335772182016}}
+{"time": 11.799999999999974, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99930232339113, "bed": 59.917689835729156}}
+{"time": 11.799999999999974, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99930232339113}}
+{"time": 11.799999999999974, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.917689835729156}}
+{"time": 11.899999999999974, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.999372091052, "bed": 59.9218053439427}}
+{"time": 11.899999999999974, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.999372091052}}
+{"time": 11.899999999999974, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.9218053439427}}
+{"time": 11.999999999999973, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9994348819468, "bed": 59.92571507674557}}
+{"time": 11.999999999999973, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9994348819468}}
+{"time": 11.999999999999973, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.92571507674557}}
+{"time": 12.099999999999973, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99949139375212, "bed": 59.92942932290829}}
+{"time": 12.099999999999973, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99949139375212}}
+{"time": 12.099999999999973, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.92942932290829}}
+{"time": 12.199999999999973, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9995422543769, "bed": 59.932957856762876}}
+{"time": 12.199999999999973, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9995422543769}}
+{"time": 12.199999999999973, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.932957856762876}}
+{"time": 12.299999999999972, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99958802893923, "bed": 59.936309963924735}}
+{"time": 12.299999999999972, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99958802893923}}
+{"time": 12.299999999999972, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.936309963924735}}
+{"time": 12.399999999999972, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9996292260453, "bed": 59.9394944657285}}
+{"time": 12.399999999999972, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9996292260453}}
+{"time": 12.399999999999972, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.9394944657285}}
+{"time": 12.499999999999972, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99966630344076, "bed": 59.94251974244207}}
+{"time": 12.499999999999972, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99966630344076}}
+{"time": 12.499999999999972, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.94251974244207}}
+{"time": 12.599999999999971, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9996996730967, "bed": 59.94539375531997}}
+{"time": 12.599999999999971, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9996996730967}}
+{"time": 12.599999999999971, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.94539375531997}}
+{"time": 12.69999999999997, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99972970578702, "bed": 59.94812406755397}}
+{"time": 12.69999999999997, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99972970578702}}
+{"time": 12.69999999999997, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.94812406755397}}
+{"time": 12.79999999999997, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9997567352083, "bed": 59.95071786417627}}
+{"time": 12.79999999999997, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9997567352083}}
+{"time": 12.79999999999997, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.95071786417627}}
+{"time": 12.89999999999997, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9997810616875, "bed": 59.95318197096746}}
+{"time": 12.89999999999997, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9997810616875}}
+{"time": 12.89999999999997, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.95318197096746}}
+{"time": 12.99999999999997, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99980295551873, "bed": 59.95552287241908}}
+{"time": 12.99999999999997, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99980295551873}}
+{"time": 12.99999999999997, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.95552287241908}}
+{"time": 13.09999999999997, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99982265996687, "bed": 59.95774672879813}}
+{"time": 13.09999999999997, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99982265996687}}
+{"time": 13.09999999999997, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.95774672879813}}
+{"time": 13.199999999999969, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99984039397017, "bed": 59.95985939235822}}
+{"time": 13.199999999999969, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99984039397017}}
+{"time": 13.199999999999969, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.95985939235822}}
+{"time": 13.299999999999969, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99985635457315, "bed": 59.96186642274031}}
+{"time": 13.299999999999969, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99985635457315}}
+{"time": 13.299999999999969, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.96186642274031}}
+{"time": 13.399999999999968, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99987071911585, "bed": 59.963773101603294}}
+{"time": 13.399999999999968, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99987071911585}}
+{"time": 13.399999999999968, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.963773101603294}}
+{"time": 13.499999999999968, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99988364720426, "bed": 59.96558444652313}}
+{"time": 13.499999999999968, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99988364720426}}
+{"time": 13.499999999999968, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.96558444652313}}
+{"time": 13.599999999999968, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99989528248383, "bed": 59.96730522419698}}
+{"time": 13.599999999999968, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99989528248383}}
+{"time": 13.599999999999968, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.96730522419698}}
+{"time": 13.699999999999967, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99990575423544, "bed": 59.96893996298713}}
+{"time": 13.699999999999967, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99990575423544}}
+{"time": 13.699999999999967, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.96893996298713}}
+{"time": 13.799999999999967, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9999151788119, "bed": 59.970492964837774}}
+{"time": 13.799999999999967, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9999151788119}}
+{"time": 13.799999999999967, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.970492964837774}}
+{"time": 13.899999999999967, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9999236609307, "bed": 59.971968316595884}}
+{"time": 13.899999999999967, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9999236609307}}
+{"time": 13.899999999999967, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.971968316595884}}
+{"time": 13.999999999999966, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99993129483764, "bed": 59.97336990076609}}
+{"time": 13.999999999999966, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99993129483764}}
+{"time": 13.999999999999966, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.97336990076609}}
+{"time": 14.099999999999966, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99993816535388, "bed": 59.974701405727785}}
+{"time": 14.099999999999966, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99993816535388}}
+{"time": 14.099999999999966, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.974701405727785}}
+{"time": 14.199999999999966, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9999443488185, "bed": 59.9759663354414}}
+{"time": 14.199999999999966, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9999443488185}}
+{"time": 14.199999999999966, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.9759663354414}}
+{"time": 14.299999999999965, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99994991393666, "bed": 59.97716801866933}}
+{"time": 14.299999999999965, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99994991393666}}
+{"time": 14.299999999999965, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.97716801866933}}
+{"time": 14.399999999999965, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.999954922543, "bed": 59.97830961773587}}
+{"time": 14.399999999999965, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.999954922543}}
+{"time": 14.399999999999965, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.97830961773587}}
+{"time": 14.499999999999964, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.9999594302887, "bed": 59.97939413684907}}
+{"time": 14.499999999999964, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.9999594302887}}
+{"time": 14.499999999999964, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.97939413684907}}
+{"time": 14.599999999999964, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99996348725983, "bed": 59.98042443000662}}
+{"time": 14.599999999999964, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99996348725983}}
+{"time": 14.599999999999964, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.98042443000662}}
+{"time": 14.699999999999964, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99996713853386, "bed": 59.98140320850629}}
+{"time": 14.699999999999964, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99996713853386}}
+{"time": 14.699999999999964, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.98140320850629}}
+{"time": 14.799999999999963, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99997042468047, "bed": 59.98233304808098}}
+{"time": 14.799999999999963, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99997042468047}}
+{"time": 14.799999999999963, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.98233304808098}}
+{"time": 14.899999999999963, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99997338221243, "bed": 59.98321639567693}}
+{"time": 14.899999999999963, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99997338221243}}
+{"time": 14.899999999999963, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.98321639567693}}
+{"time": 14.999999999999963, "component": "Thermal_ECU", "event_type": "TEMP_UPDATE", "details": {"hotend": 199.99997604399118, "bed": 59.98405557589309}}
+{"time": 14.999999999999963, "component": "Hotend_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 199.99997604399118}}
+{"time": 14.999999999999963, "component": "Bed_Thermistor", "event_type": "SENSOR_READING", "details": {"value": 59.98405557589309}}
