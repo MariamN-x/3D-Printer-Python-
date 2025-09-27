@@ -143,3 +143,4 @@ def run_simulation(env, printer, gcode_program):
         time.sleep(0.2)
     
     print("Print job completed!")
+
