@@ -15,47 +15,43 @@ import VsiTcpUdpPythonGateway as vsiEthernetPythonGateway
 class MySignals:
 	def __init__(self):
 		# Inputs
-		self.headX = 0
-		self.headY = 0
-		self.headZ = 0
-		self.nozzleTemp = 0
-		self.bedTemp = 0
-		self.filamentRemaining = 0
-		self.printerState = 0
-		self.errorCode = 0
-
-		# Outputs
 		self.dashboardStart = 0
 		self.dashboardRefill = 0
 		self.dashboardPause = 0
 		self.dashboardEmergencyStop = 0
 
+		# Outputs
+		self.gcode_line = [0] * 512
+		self.gcode_len = 0
+		self.startSignal = 0
+		self.refillCommand = 0
 
 
-srcMacAddress = [0x12, 0x34, 0x56, 0x78, 0x90, 0x03]
+
+srcMacAddress = [0x12, 0x34, 0x56, 0x78, 0x90, 0x01]
 ProcessorComponentMacAddress = [0x12, 0x34, 0x56, 0x78, 0x90, 0x02]
-InputComponentMacAddress = [0x12, 0x34, 0x56, 0x78, 0x90, 0x01]
-srcIpAddress = [192, 168, 2, 12]
+DashboardComponentMacAddress = [0x12, 0x34, 0x56, 0x78, 0x90, 0x03]
+srcIpAddress = [192, 168, 2, 10]
 ProcessorComponentIpAddress = [192, 168, 2, 11]
-InputComponentIpAddress = [192, 168, 2, 10]
+DashboardComponentIpAddress = [192, 168, 2, 12]
 
-ProcessorComponentSocketPortNumber0 = 9001
+ProcessorComponentSocketPortNumber0 = 9000
 InputComponentSocketPortNumber1 = 9002
 
-DashboardComponent0 = 0
+InputComponent0 = 0
 DashboardComponent1 = 1
 
 
 # Start of user custom code region. Please apply edits only within these regions:  Global Variables & Definitions
 
 # End of user custom code region. Please don't edit beyond this point.
-class DashboardComponent:
+class InputComponent:
 
 	def __init__(self, args):
-		self.componentId = 2
+		self.componentId = 0
 		self.localHost = args.server_url
 		self.domain = args.domain
-		self.portNum = 50103
+		self.portNum = 50101
         
 		self.simulationStep = 0
 		self.stopRequested = False
@@ -115,7 +111,7 @@ class DashboardComponent:
 				if(receivedData[3] != 0):
 					self.decapsulateReceivedData(receivedData)
 
-				receivedData = vsiEthernetPythonGateway.recvEthernetPacket(InputComponentSocketPortNumber1)
+				receivedData = vsiEthernetPythonGateway.recvEthernetPacket(self.clientPortNum[DashboardComponent1])
 				if(receivedData[3] != 0):
 					self.decapsulateReceivedData(receivedData)
 
@@ -123,35 +119,18 @@ class DashboardComponent:
 
 				# End of user custom code region. Please don't edit beyond this point.
 
-				#Send ethernet packet to InputComponent
-				self.sendEthernetPacketToInputComponent()
+				#Send ethernet packet to ProcessorComponent
+				self.sendEthernetPacketToProcessorComponent()
 
 				# Start of user custom code region. Please apply edits only within these regions:  After sending the packet
 
 				# End of user custom code region. Please don't edit beyond this point.
 
-				print("\n+=DashboardComponent+=")
+				print("\n+=InputComponent+=")
 				print("  VSI time:", end = " ")
 				print(vsiCommonPythonApi.getSimulationTimeInNs(), end = " ")
 				print("ns")
 				print("  Inputs:")
-				print("\theadX =", end = " ")
-				print(self.mySignals.headX)
-				print("\theadY =", end = " ")
-				print(self.mySignals.headY)
-				print("\theadZ =", end = " ")
-				print(self.mySignals.headZ)
-				print("\tnozzleTemp =", end = " ")
-				print(self.mySignals.nozzleTemp)
-				print("\tbedTemp =", end = " ")
-				print(self.mySignals.bedTemp)
-				print("\tfilamentRemaining =", end = " ")
-				print(self.mySignals.filamentRemaining)
-				print("\tprinterState =", end = " ")
-				print(self.mySignals.printerState)
-				print("\terrorCode =", end = " ")
-				print(self.mySignals.errorCode)
-				print("  Outputs:")
 				print("\tdashboardStart =", end = " ")
 				print(self.mySignals.dashboardStart)
 				print("\tdashboardRefill =", end = " ")
@@ -160,6 +139,15 @@ class DashboardComponent:
 				print(self.mySignals.dashboardPause)
 				print("\tdashboardEmergencyStop =", end = " ")
 				print(self.mySignals.dashboardEmergencyStop)
+				print("  Outputs:")
+				print("\tgcode_line =", end = " ")
+				print("[", *self.mySignals.gcode_line[:10], "...", *self.mySignals.gcode_line[-10:], "]")
+				print("\tgcode_len =", end = " ")
+				print(self.mySignals.gcode_len)
+				print("\tstartSignal =", end = " ")
+				print(self.mySignals.startSignal)
+				print("\trefillCommand =", end = " ")
+				print(self.mySignals.refillCommand)
 				print("\n\n")
 
 				self.updateInternalVariables()
@@ -196,11 +184,11 @@ class DashboardComponent:
 
 
 	def establishTcpUdpConnection(self):
-		if(self.clientPortNum[DashboardComponent0] == 0):
-			self.clientPortNum[DashboardComponent0] = vsiEthernetPythonGateway.tcpConnect(bytes(ProcessorComponentIpAddress), ProcessorComponentSocketPortNumber0)
+		if(self.clientPortNum[InputComponent0] == 0):
+			self.clientPortNum[InputComponent0] = vsiEthernetPythonGateway.tcpConnect(bytes(ProcessorComponentIpAddress), ProcessorComponentSocketPortNumber0)
 
 		if(self.clientPortNum[DashboardComponent1] == 0):
-			self.clientPortNum[DashboardComponent1] = vsiEthernetPythonGateway.tcpConnect(bytes(InputComponentIpAddress), InputComponentSocketPortNumber1)
+			self.clientPortNum[DashboardComponent1] = vsiEthernetPythonGateway.tcpListen(InputComponentSocketPortNumber1)
 
 		if(self.clientPortNum[DashboardComponent1] == 0):
 			print("Error: Failed to connect to port: ProcessorComponent on TCP port: ") 
@@ -223,39 +211,31 @@ class DashboardComponent:
 		for i in range(self.receivedNumberOfBytes):
 			self.receivedPayload[i] = receivedData[2][i]
 
-		if(self.receivedSrcPortNumber == ProcessorComponentSocketPortNumber0):
-			print("Received packet from ProcessorComponent")
+		if(self.receivedSrcPortNumber == self.clientPortNum[DashboardComponent1]):
+			print("Received packet from DashboardComponent")
 			receivedPayload = bytes(self.receivedPayload)
-			self.mySignals.headX, receivedPayload = self.unpackBytes('d', receivedPayload)
+			self.mySignals.dashboardStart, receivedPayload = self.unpackBytes('B', receivedPayload)
 
-			self.mySignals.headY, receivedPayload = self.unpackBytes('d', receivedPayload)
+			self.mySignals.dashboardRefill, receivedPayload = self.unpackBytes('B', receivedPayload)
 
-			self.mySignals.headZ, receivedPayload = self.unpackBytes('d', receivedPayload)
+			self.mySignals.dashboardPause, receivedPayload = self.unpackBytes('B', receivedPayload)
 
-			self.mySignals.nozzleTemp, receivedPayload = self.unpackBytes('d', receivedPayload)
-
-			self.mySignals.bedTemp, receivedPayload = self.unpackBytes('d', receivedPayload)
-
-			self.mySignals.filamentRemaining, receivedPayload = self.unpackBytes('d', receivedPayload)
-
-			self.mySignals.printerState, receivedPayload = self.unpackBytes('i', receivedPayload)
-
-			self.mySignals.errorCode, receivedPayload = self.unpackBytes('i', receivedPayload)
+			self.mySignals.dashboardEmergencyStop, receivedPayload = self.unpackBytes('B', receivedPayload)
 
 
-	def sendEthernetPacketToInputComponent(self):
+	def sendEthernetPacketToProcessorComponent(self):
 		bytesToSend = bytes()
 
-		bytesToSend += self.packBytes('B', self.mySignals.dashboardStart)
+		bytesToSend += self.packBytes('B', self.mySignals.gcode_line)
 
-		bytesToSend += self.packBytes('B', self.mySignals.dashboardRefill)
+		bytesToSend += self.packBytes('L', self.mySignals.gcode_len)
 
-		bytesToSend += self.packBytes('B', self.mySignals.dashboardPause)
+		bytesToSend += self.packBytes('B', self.mySignals.startSignal)
 
-		bytesToSend += self.packBytes('B', self.mySignals.dashboardEmergencyStop)
+		bytesToSend += self.packBytes('B', self.mySignals.refillCommand)
 
-		#Send ethernet packet to InputComponent
-		vsiEthernetPythonGateway.sendEthernetPacket(InputComponentSocketPortNumber1, bytes(bytesToSend))
+		#Send ethernet packet to ProcessorComponent
+		vsiEthernetPythonGateway.sendEthernetPacket(ProcessorComponentSocketPortNumber0, bytes(bytesToSend))
 
 		# Start of user custom code region. Please apply edits only within these regions:  Protocol's callback function
 
@@ -339,8 +319,8 @@ def main():
 
 	args = inputArgs.parse_args()
                       
-	dashboardComponent = DashboardComponent(args)
-	dashboardComponent.mainThread()
+	inputComponent = InputComponent(args)
+	inputComponent.mainThread()
 
 
 
