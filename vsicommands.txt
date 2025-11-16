@@ -1,24 +1,66 @@
+# Existing components
 add component -type Python -name InputComponent
 add component -type Python -name ProcessorComponent
 
+# New Dashboard component
+add component -type Python -name DashboardComponent
+
+# Existing ports
 add port -componentName InputComponent -name inPort -gateway python2DtEthernet
 add port -componentName ProcessorComponent -name procPort -gateway python2DtEthernet
 
+# Single port for Dashboard (only one Ethernet port allowed per component)
+add port -componentName DashboardComponent -name dashPort -gateway python2DtEthernet
+
+# Configure existing ports
 config port -componentName InputComponent -portName inPort -macAddress 12:34:56:78:90:01 -ipAddress 192.168.2.10
 config port -componentName ProcessorComponent -portName procPort -macAddress 12:34:56:78:90:02 -ipAddress 192.168.2.11
 
-# ---- transport between the two ports ----
+# Configure Dashboard port
+config port -componentName DashboardComponent -portName dashPort -macAddress 12:34:56:78:90:03 -ipAddress 192.168.2.12
+
+# ---- transport between the existing components ----
 add portSocket -componentName InputComponent -portName inPort -ipPortNum 9000 -socketType client -protocol tcpIp
 add portSocket -componentName ProcessorComponent -portName procPort -ipPortNum 9000 -socketType server -protocol tcpIp
 
-define componentSignals -componentName InputComponent -signals [gcode_line:uint8_t[512]:output,gcode_len:uint32_t:output,startSignal:uint8_t:output,refillCommand:uint8_t:output]
+# ---- transport for Dashboard to Processor ----
+add portSocket -componentName DashboardComponent -portName dashPort -ipPortNum 9001 -socketType client -protocol tcpIp
+add portSocket -componentName ProcessorComponent -portName procPort -ipPortNum 9001 -socketType server -protocol tcpIp
+
+# ---- transport for Dashboard to Input ----
+add portSocket -componentName DashboardComponent -portName dashPort -ipPortNum 9002 -socketType client -protocol tcpIp
+add portSocket -componentName InputComponent -portName inPort -ipPortNum 9002 -socketType server -protocol tcpIp
+
+# Define existing signals
+define componentSignals -componentName InputComponent -signals [gcode_line:uint8_t[512]:output,gcode_len:uint32_t:output,startSignal:uint8_t:output,refillCommand:uint8_t:output,dashboardStart:uint8_t:input,dashboardRefill:uint8_t:input,dashboardPause:uint8_t:input,dashboardEmergencyStop:uint8_t:input]
 
 define componentSignals -componentName ProcessorComponent -signals [gcode_line:uint8_t[512]:input,gcode_len:uint32_t:input,startSignal:uint8_t:input,refillCommand:uint8_t:input,headX:double:output,headY:double:output,headZ:double:output,nozzleTemp:double:output,bedTemp:double:output,filamentRemaining:double:output,printerState:int:output,errorCode:int:output]
 
+# Define Dashboard signals
+define componentSignals -componentName DashboardComponent -signals [headX:double:input,headY:double:input,headZ:double:input,nozzleTemp:double:input,bedTemp:double:input,filamentRemaining:double:input,printerState:int:input,errorCode:int:input,dashboardStart:uint8_t:output,dashboardRefill:uint8_t:output,dashboardPause:uint8_t:output,dashboardEmergencyStop:uint8_t:output]
+
+# Existing connections
 connect signals -sourceSignal InputComponent.gcode_line -destSignal ProcessorComponent.gcode_line -sourcePortName inPort -destPortName procPort
 connect signals -sourceSignal InputComponent.gcode_len -destSignal ProcessorComponent.gcode_len -sourcePortName inPort -destPortName procPort
 connect signals -sourceSignal InputComponent.startSignal -destSignal ProcessorComponent.startSignal -sourcePortName inPort -destPortName procPort
 connect signals -sourceSignal InputComponent.refillCommand -destSignal ProcessorComponent.refillCommand -sourcePortName inPort -destPortName procPort
+
+# New Dashboard connections
+# Dashboard receives state from Processor
+connect signals -sourceSignal ProcessorComponent.headX -destSignal DashboardComponent.headX -sourcePortName procPort -destPortName dashPort
+connect signals -sourceSignal ProcessorComponent.headY -destSignal DashboardComponent.headY -sourcePortName procPort -destPortName dashPort
+connect signals -sourceSignal ProcessorComponent.headZ -destSignal DashboardComponent.headZ -sourcePortName procPort -destPortName dashPort
+connect signals -sourceSignal ProcessorComponent.nozzleTemp -destSignal DashboardComponent.nozzleTemp -sourcePortName procPort -destPortName dashPort
+connect signals -sourceSignal ProcessorComponent.bedTemp -destSignal DashboardComponent.bedTemp -sourcePortName procPort -destPortName dashPort
+connect signals -sourceSignal ProcessorComponent.filamentRemaining -destSignal DashboardComponent.filamentRemaining -sourcePortName procPort -destPortName dashPort
+connect signals -sourceSignal ProcessorComponent.printerState -destSignal DashboardComponent.printerState -sourcePortName procPort -destPortName dashPort
+connect signals -sourceSignal ProcessorComponent.errorCode -destSignal DashboardComponent.errorCode -sourcePortName procPort -destPortName dashPort
+
+# Dashboard sends commands to Input
+connect signals -sourceSignal DashboardComponent.dashboardStart -destSignal InputComponent.dashboardStart -sourcePortName dashPort -destPortName inPort
+connect signals -sourceSignal DashboardComponent.dashboardRefill -destSignal InputComponent.dashboardRefill -sourcePortName dashPort -destPortName inPort
+connect signals -sourceSignal DashboardComponent.dashboardPause -destSignal InputComponent.dashboardPause -sourcePortName dashPort -destPortName inPort
+connect signals -sourceSignal DashboardComponent.dashboardEmergencyStop -destSignal InputComponent.dashboardEmergencyStop -sourcePortName dashPort -destPortName inPort
 
 set workspaceDir .
 set digitalTwinName printerTwin
